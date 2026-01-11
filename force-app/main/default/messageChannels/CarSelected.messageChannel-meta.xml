@@ -1,0 +1,9 @@
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+<description>This event is fired when cars filter change</description>
+<isExposed>false</isExposed>
+<lightningMessageFields>
+<description>Selected Cars ID</description>
+<fieldName>carId</fieldName>
+</lightningMessageFields>
+<masterLabel>selecetdCars</masterLabel>
+</LightningMessageChannel>

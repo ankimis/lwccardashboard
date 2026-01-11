@@ -1,0 +1,23 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="6" padding="around-small">
+            <lightning-card title="Total Opportunities 1">
+                <template if:true={piechartkeys.length}>
+                    <c-charts type="doughnut"
+                        chart-heading="Opportunities by Stage"
+                        piechart-keys={piechartkeys}
+                        piechart-values={piechartdata}></c-charts>
+                </template>
+            </lightning-card>
+        </lightning-layout-item>
+        <lightning-layout-item size="6" padding="around-small">
+            <lightning-card title="Total Opportunities 2">
+                <template if:true={piechartkeys.length}>
+                    <c-charts type="bar" chart-heading="Zero to Hero"
+                        piechart-keys={piechartkeys}
+                        piechart-values={piechartdata}></c-charts>
+                </template>
+            </lightning-card>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

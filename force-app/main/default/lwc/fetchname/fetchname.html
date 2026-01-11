@@ -1,0 +1,23 @@
+<template>
+    
+    <!-- craete a input for name and button to fetch the name -->
+    <lightning-card title="Fetch Contact Names" icon-name="standard:contact">
+        <div class="slds-m-around_medium">
+
+            <lightning-input type="text" label="Enter Contact Name"></lightning-input>
+            <lightning-button label="Fetch Contact Names" onclick={fetchContactNames} class="slds-m-bottom_small"></lightning-button>
+             
+        </div>      
+    </lightning-card>
+    <lightning-datatable
+      key-field="id"
+      data={records}
+      columns={columns}
+        onrowaction={handleRowAction}
+    ></lightning-datatable>
+    <c-update-contact-reord record-id={updateid} 
+    onrefreshdata={handleRefresh}
+    ></c-update-contact-reord>
+    
+    
+</template>

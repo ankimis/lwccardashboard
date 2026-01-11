@@ -1,0 +1,56 @@
+<template>
+    <!-- This is a contact records component -->
+    <lightning-card title="Contact Records" icon-name="standard:contact">
+        <div class="slds-m-around_medium">
+            <!-- <lightning-button label="Load Contacts" onclick={loadContacts} class="slds-m-bottom_small" variant="brand"></lightning-button> -->
+            <template if:true={data}>
+
+                <!-- I want Oder by Records as per FullNAme ANd Email and Phone Number when select option -->
+                <!-- it must be in sipmle style -->
+                <lightning-layout>
+                    <lightning-layout-item flexibility="auto"
+                        padding="around-small" class="slds-col slds-size_1-of-3">
+                        <lightning-combobox name="order" label="Order By"
+                            options={options}
+                            onchange={handleChange}></lightning-combobox>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <table
+                    class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={data} for:item="contact">
+                            <tr key={contact.email}>
+                                <td>{contact.fullName}</td>
+                                <td>{contact.email}</td>
+                                <td>{contact.phone}</td>
+                                <td>
+                                    <lightning-button label="Delete"
+                                        onclick={deleteContact}
+                                        data-id={contact.email}
+                                        variant="destructive"></lightning-button>
+                                    <lightning-button label="Edit"
+                                        onclick={updateContact}
+                                        data-id={contact.email}
+                                        variant="brand"></lightning-button>
+
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error">{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

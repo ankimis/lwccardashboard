@@ -1,0 +1,24 @@
+<template>
+    <h1>CDV Demo Component</h1>
+    <lightning-layout multiple-rows>
+       
+        <lightning-layout-item size="3"></lightning-layout-item>
+        <lightning-card title="Account Details" class=" slds-m-around_medium ">
+            <lightning-button label="Generate Csv" onclick={generateCSV} class="slds-m-around_medium" variant="brand"></lightning-button>
+        <lightning-layout-item size="6" padding="around-medium" class=" slds-m-around_medium  slds-text-heading_small ">
+            <template if:true={accountData}>
+                <template if:true={accountData.length}>
+                    <h1>Total Accounts: {accountData.length}</h1>
+                </template>
+                <template if:false={accountData.length}>
+                    <p>No Accounts found.</p>
+                </template>
+                <template for:each={accountData} for:item="acc" class="slds-m-around_medium">
+                    <p key={acc.Id}> {acc.Name}</p>
+                </template>
+            </template>              
+        </lightning-layout-item>
+        </lightning-card>
+        <lightning-layout-item size="3"></lightning-layout-item>      
+    </lightning-layout>
+</template>

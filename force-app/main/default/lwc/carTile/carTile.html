@@ -1,0 +1,17 @@
+<template>
+    <div>
+        <div class="content" onclick={handleClick}>
+            <img src={car.Picture_URL__c} alt="Car Image" class="slds-align_absolute-center car-image"/>
+            <div>
+                <p class="slds-align_absolute-center title">
+                  Category: {car.Category__c}
+                </p>
+                <p>
+                    MSRP:
+                    <lightning-formatted-number format-style="currency" value={car.MSRP__c} class="price" curreny-code="USD"
+                    maximum-fraction-digits="0"></lightning-formatted-number>
+                </p>
+            </div>
+        </div>
+    </div>
+</template>

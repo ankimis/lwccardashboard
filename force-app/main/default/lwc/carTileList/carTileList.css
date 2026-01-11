@@ -1,0 +1,14 @@
+c-car-tile{
+    display: flex;
+    max-width: 200px; 
+    flex: 1;
+    padding: 10px;
+}
+.content{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.wrapper{
+    background-color: rgb(131, 143, 155);
+}

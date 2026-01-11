@@ -1,0 +1,65 @@
+<template>
+    <lightning-card title="Filter" icon-name="standard:calibration">
+        <div class="slds-p-around_medium">
+            <!-- Car Brand Filter -->
+            <lightning-input
+                name="brand"
+                label="Search Brand"
+                type="search"
+                value={selectedBrand}
+                placeholder="Search a brand"
+                onchange={handleSearchBrand}>
+            </lightning-input>
+
+            <!-- Price Range Filter -->
+             <section class="slider-section">
+                         <lightning-slider
+                            label="Price Range"
+                            min="1000"
+                            max="999999"
+                            step="100"
+                            value={selectedPrice}
+                            onchange={hanldlePriceChange}>
+                        </lightning-slider>
+             </section>
+   
+
+          <section>
+            <h2>Catagory Field</h2>
+            <template if:true={catagoryPicklistValues.data}>
+                <template for:each={catagoryPicklistValues.data.values} for:item="catagory">
+                    <lightning-input
+                        key={catagory.label}
+                        type="checkbox"
+                        checked
+                        name="catagoryPicklistValues"
+                        label={catagory.label}
+                        value={catagory.value}
+                        onchange={handleCatagoryChange}>
+                    </lightning-input>
+                </template>
+            </template>
+            <template if:true={catagoryPicklistValues.error}>
+                {catagoryerror}
+            </template>
+            <h2>Make</h2>
+            <template if:true={modelPicklistValues.data}>
+                <template for:each={modelPicklistValues.data.values} for:item="model">
+                    <lightning-input
+                        key={model.label}
+                        type="checkbox"
+                        checked
+                        name="modelPicklistValues"
+                        label={model.label}
+                        value={model.value}
+                        onchange={handleCatagoryChange}>
+                    </lightning-input>
+                </template>
+            </template>
+            <template if:true={modelPicklistValues.error}>
+                {makeerror}
+            </template>
+          </section>
+        </div>
+    </lightning-card>
+</template>
