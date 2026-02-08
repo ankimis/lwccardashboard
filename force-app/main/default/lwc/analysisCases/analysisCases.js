@@ -1,4 +1,4 @@
-import {   LightningElement,wire } from 'lwc';
+import {   api, LightningElement,wire } from 'lwc';
 // import {  MessageContext, subscribe ,unsubscribe} from 'lightning/messageService';
 // import channelName from '@salesforce/messageChannel/chartDataChannel__c';
 import getChart  from '@salesforce/apex/CasesOpened.getChartData';
@@ -10,7 +10,7 @@ export default class AnalysisCases extends LightningElement {
     piechartvalues=[];  
     
     subscription = null;
-
+    resultdatarefresh;
 
     // connectedCallback() {
     //     this.subscribeToMessageChannel();
@@ -19,7 +19,9 @@ export default class AnalysisCases extends LightningElement {
     // messageContext; 
 
     @wire(getChart)
-    data({data,error}) {
+    data(result) {
+        this.resultdatarefresh=result;
+        const { data, error } = result;        
         if (data) {
             console.log('Received data from Apex:1', data);
             this.piecharkeys = Object.keys(data);
@@ -55,5 +57,9 @@ export default class AnalysisCases extends LightningElement {
     //     unsubscribe(this.subscription);
     //     this.subscription = null;
     // } 
+    @api
+    refreshData() {
+        refresh(this.resultdatarefresh);
+    }
      
 }

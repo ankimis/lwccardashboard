@@ -31,4 +31,8 @@ export default class AppContainer extends LightningElement {
         // this.template.querySelector('c-analysis-cases').piechartkeys = piechartkeys;
         // this.template.querySelector('c-analysis-cases').piechartvalues = piechartvalues;
     }
+    refreshonbutton(event){
+        console.log('Refresh event received in AppContainer');
+        this.refs.refresddatachart.refreshData();
+    }
 }

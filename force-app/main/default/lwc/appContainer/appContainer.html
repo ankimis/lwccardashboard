@@ -7,7 +7,7 @@
 
     <!-- Dynamic Page Rendering -->
     <template if:true={isOpenCases}>
-        <c-open-cases onchartdataready={handleChartReady}></c-open-cases>
+        <c-open-cases onchartdataready={handleChartReady} onrefreshonbutton={refreshonbutton}></c-open-cases>
     </template>
 
     <template if:true={isPortfolio}>
@@ -15,7 +15,7 @@
     </template>
 
     <template if:true={isAnalytics}>
-        <c-analysis-cases></c-analysis-cases>
+        <c-analysis-cases lwc:ref="refresddatachart"></c-analysis-cases>
     </template>
 
     <template if:true={isSLA}>

@@ -1,4 +1,4 @@
-import { LightningElement,wire } from 'lwc';
+import {  LightningElement,wire } from 'lwc';
 import openCases from '@salesforce/apex/CasesOpened.getOpenCases';
 import { NavigationMixin } from 'lightning/navigation';
 import assignOwner from '@salesforce/apex/CasesOpened.assignOwner';
@@ -7,6 +7,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import USER_ID from '@salesforce/user/Id'; 
 import {  MessageContext, publish} from 'lightning/messageService';
 import channelName from '@salesforce/messageChannel/chartDataChannel__c';
+import { refresh } from '@salesforce/apex';
 /* https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_salesforce_modules */
 
 
@@ -19,6 +20,7 @@ export default class OpenCases extends NavigationMixin (LightningElement) {
     piecharkeys; 
     chartDatas={}
     analysisData=false
+    casesrefrsfResult;
     @wire(MessageContext)
     messageContext;
 
@@ -26,12 +28,11 @@ export default class OpenCases extends NavigationMixin (LightningElement) {
             this.loadCases(); 
     }
  
-      loadCases() {
-        
+      loadCases() {        
         openCases()
-            .then(  result => {
-                // this.cases = result;
-                 this.cases = result.map(c => {
+            .then( result => {
+                this.casesrefrsfResult = result;
+                this.cases = result.map(c => {
                 let rowClass = '';
                 let priorityBadge = '';
                     switch(c.Priority) {
@@ -94,7 +95,6 @@ export default class OpenCases extends NavigationMixin (LightningElement) {
                         this.showToast('Error', error.body.message, 'error');
                     });
             }
-
             if (action === 'close') {
                 closeCase({ caseId: caseId })
                     .then(() => {
@@ -105,6 +105,11 @@ export default class OpenCases extends NavigationMixin (LightningElement) {
                         this.showToast('Error', error.body.message, 'error');
                     });
             }
+            this.refreshData();
+            this.dispatchEvent(new CustomEvent('refreshonbutton',{
+                bubbles: true,
+                composed: true
+            })); // Notify parent to refresh if needed
         }
     showToast(title, message, variant) {
         const event = new ShowToastEvent({
@@ -144,12 +149,14 @@ export default class OpenCases extends NavigationMixin (LightningElement) {
             piechartvalues: this.piechartvalues
         };
 
-        console.log('Processed Chart Data:', this.piechartkeys, this.piechartvalues);
+        // console.log('Processed Chart Data:', this.piechartkeys, this.piechartvalues);
 
         // ✅ Publish to LMS
         publish(this.messageContext, channelName, this.chartDatas);
 
         console.log('Published chart data:', this.chartDatas);
+    }    
+    refreshData() {
+        refresh(this.casesrefrsfResult);
     }
-
 }
