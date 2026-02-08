@@ -1,0 +1,24 @@
+<template>
+    <!-- Header Component (Receives 'navigate' event) -->
+    <c-app-header
+        active-page={currentPage}
+        onnavigate={handlePageChange}>
+    </c-app-header>
+
+    <!-- Dynamic Page Rendering -->
+    <template if:true={isOpenCases}>
+        <c-open-cases onchartdataready={handleChartReady}></c-open-cases>
+    </template>
+
+    <template if:true={isPortfolio}>
+        <c-portfolio></c-portfolio>
+    </template>
+
+    <template if:true={isAnalytics}>
+        <c-analysis-cases></c-analysis-cases>
+    </template>
+
+    <template if:true={isSLA}>
+        <c-sla></c-sla>
+    </template>
+</template>

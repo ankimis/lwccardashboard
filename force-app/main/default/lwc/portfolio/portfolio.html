@@ -1,0 +1,50 @@
+<template>
+    <div class="portfolio-container slds-p-around_medium slds-grid slds-wrap slds-gutters">
+        <!-- Profile Section -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+            <div class="slds-card profile-card slds-m-around_small">
+                <header class="slds-card__header slds-grid">
+                    <div class="profile-image">
+                        <img src={profileImage} alt="Profile Picture" />
+                    </div>
+                    <div class="profile-details slds-p-left_small">
+                        <h1 class="slds-text-heading_small">{name}</h1>
+                        <p class="slds-text-title_caps">{title}</p>
+                    </div>
+                </header>
+                <div class="slds-card__body slds-card__body_inner">
+                    <h2 class="slds-text-heading_small">Skills</h2>
+                    <template for:each={skills} for:item="skill">
+                        <span key={skill} class="skill-badge">{skill}</span>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <template for:each={projects} for:item="project">
+            <div key={project.id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                <div class="slds-card project-card slds-m-around_small">
+                    <div class="slds-card__body slds-card__body_inner">
+                        <img src={project.image} alt={project.title} class="project-image"/>
+                        <h3 class="slds-text-heading_small">{project.title}</h3>
+                        <p>{project.description}</p>
+                        <a href={project.link} target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Contact Section -->
+        <div class="slds-col slds-size_1-of-1">
+            <div class="slds-card contact-card slds-m-around_small">
+                <div class="slds-card__body slds-card__body_inner">
+                    <h2 class="slds-text-heading_small">Contact</h2>
+                    <p>Email: <a href={mailtoLink}>{email}</a></p>
+                    <p>LinkedIn: <a href={linkedin} target="_blank">{linkedin}</a></p>
+                    <p>GitHub: <a href={github} target="_blank">{github}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,34 @@
+<template>
+      <div class="slds-p-around_medium slds-box slds-theme_alert-texture slds-text-align_center">
+            <h2 class="slds-text-heading_medium slds-m-bottom_xx-small">🚀 Open Cases Dashboard</h2>
+            <p class="slds-text-body_small slds-text-color_inverse">
+                Keep track of all open cases assigned to you in real time.
+            </p>
+        </div> 
+
+    <template if:true={piecharkeys}>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-card title="Total Cases 1">
+                    <c-charts
+                        type="doughnut"
+                        chart-heading="Cases by Priority"
+                        piechart-keys={piecharkeys}
+                        piechart-values={piechartvalues}>
+                    </c-charts>
+                </lightning-card>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-card title="Total Cases 2">
+                    <c-charts
+                        type="bar"
+                        chart-heading="Zero to Hero"
+                        piechart-keys={piecharkeys}
+                        piechart-values={piechartvalues}>
+                    </c-charts>
+                </lightning-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

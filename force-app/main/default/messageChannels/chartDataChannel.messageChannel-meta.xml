@@ -1,0 +1,8 @@
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata"> 
+ <masterLabel>Chart Data Channel</masterLabel>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+            <description>Share chart data between unrelated LWC components</description>
+        <fieldName>chartdatas</fieldName> 
+    </lightningMessageFields>
+</LightningMessageChannel>
