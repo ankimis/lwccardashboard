@@ -1,0 +1,69 @@
+<template>
+    <!-- <c-app-header open-cases-count={openCasesCount} onnavigate={handleNavigation}></c-app-header> -->
+    <lightning-card title="Open Cases" icon-name="custom:custom14">      
+        <template if:false={cases}>
+            <div class="slds-p-around_medium">
+                <lightning-spinner alternative-text="Loading">Loading Cases...</lightning-spinner>
+            </div>
+        </template>    
+            <template if:true={cases}> 
+                    <div class="slds-p-around_medium">
+                        <table
+                            class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered">
+                            <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Case Number">Case Number</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Subject">Subject</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Status">Status</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Priority">Priority</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Actions">Actions</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={cases} for:item="c">
+                                        <tr key={c.Id} class={c.rowClass}>
+                                            <td>
+                                            <div class="slds-truncate" title={c.CaseNumber}>
+                                                <a href="javascript:void(0);" data-id={c.Id} onclick={navigateToCase}>
+                                                    {c.CaseNumber}
+                                                </a>
+                                            </div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={c.Subject}>{c.Subject}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={c.Status}>{c.Status}</div>
+                                            </td>
+                                            <td>
+                                                <div class={c.priorityBadge} title={c.Priority}>{c.Priority}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title="Actions">
+                                                    <lightning-button-group>
+                                                        <lightning-button label="Assign to Me" data-id={c.Id} onclick={handleAction} data-action="assign"></lightning-button>
+                                                        <lightning-button label="Close Case" data-id={c.Id} onclick={handleAction} data-action="close"></lightning-button>
+                                                    </lightning-button-group>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                        </table>
+                    </div>
+                </template>
+                <template if:true={error}>
+                    <p class="slds-text-color_error">Error loading cases: {error}</p>
+                </template>
+    </lightning-card>
+</template>

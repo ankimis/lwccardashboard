@@ -49,21 +49,11 @@
         </div>
     </lightning-card>
     <template if:true={contacts.length}>
+        <h2>kf;kjfgkerh</h2>
         <c-contact-records record={contacts} ondeletecontact={deletecontct}
             onupdatecontact={updatecontact}></c-contact-records>
     </template>
 <!-- toggle button  -->
  
-    <lightning-input type="text" name="country" label="Enter Country" value={country}
-        onchange={handleChange}></lightning-input>
-    <template lwc:if={isCountryIndia}>
-        <h2 class="slds-text-align_center slds-m-top_medium">Yes Country is India</h2>
-    </template>
-    <template lwc:elseif={isCountryCanada}>
-        <h2 class="slds-text-align_center slds-m-top_medium">True Country is canada</h2>
-    </template> 
-    <template lwc:else>
-        <h2 class="slds-text-align_center slds-m-top_medium">Please enter country</h2>
-    </template>
 
 </template>

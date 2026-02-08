@@ -11,25 +11,27 @@ export default class ContactApp extends LightningElement {
      contacts = [];
      modalStatus = false;
      modalStatus2 = false;
-    handleChange (event) {
+    handleChange (event) { 
+        console.log('hellohanndle change');
+        console.log('event.target.name', event.target);
+        // console.log('event.target.value', event.target.value);
         this[event.target.name] = event.target.value;
     }
     labelbutton='Create Contact';
 
     createContact (e) {
-        console.log('create contact');
         this.messages = 'PLEASE ENTER VALID ';
-        console.log('Record : ID',this.recordId);
-
         // Create contact object dynamically        
-
+        console.log('email', this.email); 
+        console.log('phone', this.phone);
+        console.log('fullName', this.fullName);
         e.preventDefault();
         const contact = {
             fullName: this.fullName,
             email: this.email,
             phone: this.phone
         }; 
-          //console.log('contact:', contact);
+        //   console.log('contact:', contact);
         if (this.validate(contact) !== true) {
             this.messageShow = true;
             return;
@@ -132,21 +134,7 @@ export default class ContactApp extends LightningElement {
         this.modalStatus = false;
     }
 
-    // --------------lwc if else demo -----------------
-    country = 'India';
-
-    get isCountryIndia() {
-        console.log('OUTPUT : ',this.country);
-        return this.country === 'India';
-    }
-    get isCountryCanada() {
-        console.log('OUTPUT : ',this.country);
-        return this.country === 'Canada';
-    }
-
-    handleChange(event) {
-        this.country = event.target.value;
-    }
+  
      
 
 }
